@@ -1,0 +1,93 @@
+{
+  "name": "@innsight/desktop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "InnSight Hotel Management Desktop Application",
+  "main": "dist/main/main.js",
+  "scripts": {
+    "build": "tsc && node -e \"require('fs').cpSync('../../apps/api/dist/bundle.cjs', 'dist/main/api-bundle.cjs')\"",
+    "dist": "npm run build && electron-builder --win --x64",
+    "dist:dir": "npm run build && electron-builder --win --x64 --dir"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "bcrypt": "^5.1.1",
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "@innsight/config": "workspace:*",
+    "@playwright/test": "^1.61.1",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.17.9",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "playwright": "^1.61.1",
+    "typescript": "^5.7.0"
+  },
+  "build": {
+    "appId": "com.innsight.hotel-management",
+    "productName": "InnSight Hotel Management",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*"
+    ],
+    "icon": "build/icon.png",
+    "asar": false,
+    "extraResources": [
+      {
+        "from": "../../packages/database/prisma",
+        "to": "prisma"
+      },
+      {
+        "from": "../../apps/api/dist",
+        "to": "apps/api/dist"
+      },
+      {
+        "from": "../../apps/web/.next/standalone",
+        "to": "apps/web/.next/standalone"
+      },
+      {
+        "from": "../../apps/web/.next/static",
+        "to": "apps/web/.next/static"
+      },
+      {
+        "from": "../../apps/web/.next/static",
+        "to": "apps/web/.next/standalone/apps/web/.next/static"
+      },
+      {
+        "from": "../../apps/web/public",
+        "to": "apps/web/public"
+      },
+      {
+        "from": "../../node_modules/.pnpm/@prisma+client@5.22.0_prisma@5.22.0/node_modules/.prisma",
+        "to": "node_modules/.prisma"
+      },
+      {
+        "from": "../../node_modules/.pnpm/@prisma+client@5.22.0_prisma@5.22.0/node_modules/@prisma/client",
+        "to": "node_modules/@prisma/client"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "InnSight-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "InnSight"
+    }
+  }
+}

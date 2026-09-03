@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Neutral palette — light mode (values are inverted so bg-950 = white) */
+    --n50: 9, 9, 11;
+    --n100: 24, 24, 27;
+    --n200: 39, 39, 42;
+    --n300: 63, 63, 70;
+    --n400: 82, 82, 91;
+    --n500: 113, 113, 122;
+    --n600: 161, 161, 170;
+    --n700: 212, 212, 216;
+    --n800: 228, 228, 231;
+    --n900: 244, 244, 245;
+    --n950: 250, 250, 250;
+
+    --color-white: #09090b;
+    --color-black: #fafafa;
+
+    --bg-app: rgb(var(--n950));
+    --bg-sidebar: #ffffff;
+    --bg-card: #ffffff;
+    --bg-elevated: #f4f4f5;
+    --bg-input: #ffffff;
+    --text-primary: #18181b;
+    --text-secondary: #52525b;
+    --text-muted: #a1a1aa;
+    --border: #e4e4e7;
+    --border-light: #f4f4f5;
+  }
+
+  .dark {
+    --n50: 250, 250, 250;
+    --n100: 244, 244, 245;
+    --n200: 228, 228, 231;
+    --n300: 212, 212, 216;
+    --n400: 161, 161, 170;
+    --n500: 113, 113, 122;
+    --n600: 82, 82, 91;
+    --n700: 63, 63, 70;
+    --n800: 39, 39, 42;
+    --n900: 24, 24, 27;
+    --n950: 9, 9, 11;
+
+    --color-white: #ffffff;
+    --color-black: #000000;
+
+    --bg-app: #09090b;
+    --bg-sidebar: #09090b;
+    --bg-card: #18181b;
+    --bg-elevated: #27272a;
+    --bg-input: #27272a;
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1aa;
+    --text-muted: #71717a;
+    --border: #3f3f46;
+    --border-light: #27272a;
+  }
+
+  html {
+    @apply h-full;
+  }
+
+  body {
+    @apply h-full bg-[var(--bg-app)] text-[var(--text-primary)] transition-colors duration-200;
+  }
+
+  ::selection {
+    @apply bg-brand-500/20 text-brand-400;
+  }
+
+  ::-webkit-scrollbar {
+    @apply h-2 w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-neutral-700;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-neutral-700;
+  }
+
+  :root::-webkit-scrollbar-thumb {
+    @apply bg-neutral-300;
+  }
+
+  /* ── Print / PDF — force white, hide dashboard chrome ── */
+  @media print {
+    html, body {
+      background: #ffffff !important;
+      color: #000000 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-slideDown { animation: slideDown 0.2s ease-out; }
+.animate-fadeIn    { animation: fadeIn 0.3s ease-out; }
+
+@layer components {
+  .input-field {
+    @apply w-full rounded-lg border bg-[var(--bg-input)] px-3 py-2.5 text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] transition-colors focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500;
+    border-color: var(--border);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-brand-600 hover:shadow-lg hover:shadow-brand-500/25 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .card {
+    @apply rounded-xl border bg-[var(--bg-card)] backdrop-blur-sm transition-colors duration-200;
+    border-color: var(--border);
+  }
+
+  .card-hover {
+    @apply card transition-all hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-black/20;
+  }
+
+  .glass {
+    @apply backdrop-blur-xl;
+    background-color: color-mix(in srgb, var(--bg-card) 80%, transparent);
+  }
+
+  .page-container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "@innsight/config",
+  "version": "0.1.0",
+  "private": true,
+  "main": "",
+  "types": "",
+  "files": [
+    "tsconfig.base.json"
+  ]
+}

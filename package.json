@@ -1,0 +1,35 @@
+{
+  "name": "innsight",
+  "private": true,
+  "version": "1.0.0",
+  "description": "InnSight — Hotel Management Desktop Application",
+  "packageManager": "pnpm@9.15.4",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "build:desktop": "pnpm build:all && pnpm --filter @innsight/desktop dist",
+    "build:all": "pnpm db:generate && pnpm --filter @innsight/shared build && pnpm --filter @innsight/database build && pnpm --filter @innsight/api build && pnpm build:web && pnpm db:template && pnpm --filter @innsight/desktop build",
+    "db:template": "cross-env DATABASE_URL=\"file:./template.db\" prisma db push --schema=packages/database/prisma/schema.prisma --skip-generate --accept-data-loss 2>nul || echo Database template already exists",
+    "build:web": "cross-env NEXT_PUBLIC_API_URL=/api/v1 pnpm --filter @innsight/web build && node scripts/fix-standalone-nm.mjs",
+    "lint": "turbo lint",
+    "clean": "turbo clean",
+    "db:generate": "prisma generate --schema=packages/database/prisma/schema.prisma",
+    "db:push": "prisma db push --schema=packages/database/prisma/schema.prisma",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
+    "typecheck": "turbo typecheck"
+  },
+  "devDependencies": {
+    "@innsight/config": "workspace:*",
+    "@playwright/test": "^1.61.1",
+    "cross-env": "^7.0.3",
+    "playwright": "^1.61.1",
+    "prettier": "^3.4.0",
+    "prisma": "^5.22.0",
+    "turbo": "^2.3.0",
+    "typescript": "^5.7.0"
+  }
+}

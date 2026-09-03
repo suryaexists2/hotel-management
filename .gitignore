@@ -1,0 +1,73 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+.next/
+out/
+build/
+
+# Turbo
+.turbo/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Database
+packages/database/prisma/migrations/
+*.db
+*.db-journal
+!apps/desktop/assets/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+.nyc_output/
+
+# Docker
+docker/data/
+
+# Misc
+*.tsbuildinfo
+
+# Desktop build artifacts (large binaries)
+apps/desktop/release/
+apps/desktop/dist/
+apps/desktop/out/
+dist-electron/
+
+# Playwright / test artifacts
+playwright-report/
+test-results/
+
+# API test junk
+apps/api/api-test-*.txt
+apps/api/bundle.mjs
+
+# Claude local config (may contain machine-local state)
+.claude/settings.local.json
+
+# Pnpm lock backups
+pnpm-lock.yaml.*.????????
+pnpm-lock.yaml.*
