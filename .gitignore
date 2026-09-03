@@ -60,6 +60,13 @@ dist-electron/
 # Playwright / test artifacts
 playwright-report/
 test-results/
+playwright.config.ts
+e2e/
+
+# Dev/agent scratch
+.claude/
+PROJECT_STATE.md
+report.json
 
 # API test junk
 apps/api/api-test-*.txt
